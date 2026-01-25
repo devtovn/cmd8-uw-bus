@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" id="definitions" name="Auto Underwriting Decisions" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.41.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.5.0">
+  <decision id="auto-uw" name="Auto Underwriting">
+    <decisionTable id="DecisionTable_0gkkjc9" hitPolicy="UNIQUE">
+      <input id="InputClause_1uhtawr" label="age" biodi:width="192">
+        <inputExpression id="LiteralExpression_0js32pd" typeRef="number">
+          <text>age</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0bsu19f" label="disease">
+        <inputExpression id="LiteralExpression_0jqov7s" typeRef="string">
+          <text>disease</text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_10mnzzm" label="decision" name="uwDecision" typeRef="string" />
+      <rule id="DecisionRule_age_less_18">
+        <inputEntry id="UnaryTests_age_less_18">
+          <text>&lt; 18</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_any_1">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_reject_young">
+          <text>"AUTO_REJECT"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_age_more_60">
+        <inputEntry id="UnaryTests_more_60">
+          <text>&gt; 60</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_any_2">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_reject_old">
+          <text>"AUTO_REJECT"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1nmatdg">
+        <inputEntry id="UnaryTests_1fjgcl2">
+          <text>[18..60]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_03emad6">
+          <text>"NONE"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0onab87">
+          <text>"AUTO_APPROVE"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_request_docs">
+        <inputEntry id="UnaryTests_age_minor">
+          <text>[18..60]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_minor_disease">
+          <text>"MINOR"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_request_docs">
+          <text>"REQUEST_DOC"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_critical">
+        <inputEntry id="UnaryTests_age_critical">
+          <text>[18..60]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1mcz5sb">
+          <text>"CRITICAL"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0hmmfzi">
+          <text>"MANUAL_REVIEW"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0qazj9s">
+        <inputEntry id="UnaryTests_1o18naa">
+          <text>[18..60]</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0a0xus5">
+          <text>not("NONE","MINOR","CRITICAL")</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1qvu9q8">
+          <text>"MANUAL_REVIEW"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="DMNDiagram_09r5hmu">
+      <dmndi:DMNShape id="DMNShape_08ui3j1" dmnElementRef="auto-uw">
+        <dc:Bounds height="80" width="180" x="150" y="80" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
