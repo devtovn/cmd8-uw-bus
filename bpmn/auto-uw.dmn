@@ -7,12 +7,12 @@
           <text>age</text>
         </inputExpression>
       </input>
-      <input id="InputClause_0bsu19f" label="disease">
+      <input id="InputClause_0bsu19f" label="disease" biodi:width="273.9921875">
         <inputExpression id="LiteralExpression_0jqov7s" typeRef="string">
           <text>disease</text>
         </inputExpression>
       </input>
-      <output id="OutputClause_10mnzzm" label="decision" name="uwDecision" typeRef="string" />
+      <output id="OutputClause_10mnzzm" label="decision" name="uwDecision" typeRef="string" biodi:width="257.9921875" />
       <rule id="DecisionRule_age_less_18">
         <inputEntry id="UnaryTests_age_less_18">
           <text>&lt; 18</text>

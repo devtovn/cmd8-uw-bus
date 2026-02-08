@@ -12,7 +12,6 @@
         <zeebe:calledDecision decisionId="auto-uw" resultVariable="uwDecision" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_to_auto</bpmn:incoming>
-      <bpmn:incoming>Flow_from_docs</bpmn:incoming>
       <bpmn:outgoing>Flow_to_gateway</bpmn:outgoing>
     </bpmn:businessRuleTask>
     <bpmn:endEvent id="end" name="Completed">
@@ -25,7 +24,7 @@
       <bpmn:outgoing>Flow_reject</bpmn:outgoing>
       <bpmn:outgoing>Flow_approve</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:sequenceFlow id="Flow_from_docs" sourceRef="requestDocs" targetRef="autoUw-BPMN" />
+    <bpmn:sequenceFlow id="Flow_from_docs" sourceRef="requestDocs" targetRef="manualReview" />
     <bpmn:sequenceFlow id="Flow_to_auto" sourceRef="receiveApp" targetRef="autoUw-BPMN" />
     <bpmn:sequenceFlow id="Flow_to_end" sourceRef="sendPolicy" targetRef="end" />
     <bpmn:sequenceFlow id="Flow_to_gateway" sourceRef="autoUw-BPMN" targetRef="decisionGw" />
@@ -75,12 +74,14 @@
         </zeebe:ioMapping>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_manual</bpmn:incoming>
+      <bpmn:incoming>Flow_from_docs</bpmn:incoming>
       <bpmn:outgoing>Flow_0615wbn</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:userTask id="requestDocs" name="Upload Additional Docs">
       <bpmn:extensionElements>
         <zeebe:assignmentDefinition assignee="uw2" />
         <zeebe:userTask />
+        <zeebe:formDefinition externalReference="http://localhost:8081/external_form_1.html" />
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_docs</bpmn:incoming>
       <bpmn:outgoing>Flow_from_docs</bpmn:outgoing>
@@ -144,7 +145,7 @@
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="requestDocs_di" bpmnElement="requestDocs">
-        <dc:Bounds x="540" y="410" width="100" height="80" />
+        <dc:Bounds x="550" y="410" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0r69eds_di" bpmnElement="Event_0r69eds">
         <dc:Bounds x="872" y="612" width="36" height="36" />
@@ -171,9 +172,9 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_from_docs_di" bpmnElement="Flow_from_docs">
-        <di:waypoint x="540" y="450" />
-        <di:waypoint x="450" y="450" />
-        <di:waypoint x="450" y="250" />
+        <di:waypoint x="650" y="450" />
+        <di:waypoint x="740" y="450" />
+        <di:waypoint x="740" y="360" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_to_auto_di" bpmnElement="Flow_to_auto">
         <di:waypoint x="340" y="210" />
